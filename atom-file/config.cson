@@ -1,0 +1,53 @@
+"*":
+  "exception-reporting":
+    userId: "daa8f74c-46cf-4afb-ed55-4d26cb9f0d8b"
+  welcome:
+    showOnStartup: false
+  core:
+    projectHome: "/home/wuxiangdong/WorkSpace"
+    autoHideMenuBar: true
+    themes: [
+      "one-dark-ui"
+      "solarized-dark-syntax"
+    ]
+  editor:
+    invisibles: {}
+    tabLength: 4
+    lineHeight: 1.35
+    showInvisibles: true
+    softWrap: true
+    tabType: "hard"
+  linter: {}
+  build:
+    scrollOnError: true
+    saveOnBuild: true
+  "build-tools": {}
+  "file-icons": {}
+  "merge-conflicts": {}
+  "symbols-tree-view":
+    scrollAnimation: false
+  "tree-view-background": {}
+  "project-manager": {}
+  "tree-view": {}
+  "linter-lua": {}
+  "autocomplete-plus": {}
+  term2:
+    autoRunCommand: "cd /home/wuxiangdong/WorkSpace"
+  "autocomplete-clang":
+    "preCompiledHeaders c++": [
+      "iostream"
+    ]
+  "git-plus": {}
+  "atom-terminal": {}
+  "vim-mode": {}
+  "highlight-column": {}
+  "linter-clang": {}
+  "vim-surround":
+    surroundCommand: "z"
+  deprecated:
+    tool:
+      make: true
+  minimap:
+    plugins:
+      "find-and-replace": true
+      "git-diff": true
