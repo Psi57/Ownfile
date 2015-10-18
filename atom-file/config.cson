@@ -8,7 +8,10 @@
     autoHideMenuBar: true
     themes: [
       "one-dark-ui"
-      "solarized-dark-syntax"
+      "gruvbox"
+    ]
+    packagesWithKeymapsDisabled: [
+      "highlight-line"
     ]
   editor:
     invisibles: {}
@@ -17,6 +20,7 @@
     showInvisibles: true
     softWrap: true
     tabType: "hard"
+    fontFamily: "Source Code Pro,Source Han Sans CN,Source Han Sans TW,Source Han Sans JP,Source Han Sans KR"
   linter: {}
   build:
     scrollOnError: true
@@ -31,14 +35,14 @@
   "tree-view": {}
   "linter-lua": {}
   "autocomplete-plus": {}
-  term2:
-    autoRunCommand: "cd /home/wuxiangdong/WorkSpace"
+  term2: {}
   "autocomplete-clang":
     "preCompiledHeaders c++": [
       "iostream"
     ]
   "git-plus": {}
-  "atom-terminal": {}
+  "atom-terminal":
+    app: "konsole"
   "vim-mode": {}
   "highlight-column": {}
   "linter-clang": {}
@@ -51,3 +55,11 @@
     plugins:
       "find-and-replace": true
       "git-diff": true
+  "highlight-line":
+    hideHighlightOnSelect: true
+  "fuzzy-finder": {}
+  "tree-view-finder": {}
+  "one-dark-ui": {}
+  "git-projects": {}
+  "atom-terminal-panel": {}
+  "git-log": {}

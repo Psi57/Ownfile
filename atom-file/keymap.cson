@@ -27,19 +27,22 @@
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 #设置候选全局上下移动及打开分割窗口
 'body':
-	'shift-alt-k':'core:move-up'  #光标向上移动
-	'shift-alt-j':'core:move-down' #光标向下移动
-	'shift-alt-h':'core:move-left' #光标向左移动
-	'shift-alt-l':'core:move-right' #光标向右移动
-	'ctrl-h ctrl-h':'pane:split-left'      #分割窗口
-	'ctrl-j ctrl-j':'pane:split-down'      #分割窗口
-	'ctrl-k ctrl-k':'pane:split-up'         #分割窗口
-	'ctrl-l ctrl-l':'pane:split-right'     #分割窗口
-	'alt-h alt-h':'window:focus-pane-on-left'      #移动左窗口
-	'alt-j alt-j':'window:focus-pane-below'      #移动下窗口
-	'alt-k alt-k':'window:focus-pane-above'         #移动上窗口
-	'alt-l alt-l':'window:focus-pane-on-right'     #移动右窗口
-	'ctrl-d ctrl-d':'pane:close'  #关闭面板
+  'ctrl-h ctrl-h':'pane:split-left'      #分割窗口
+  'ctrl-j ctrl-j':'pane:split-down'      #分割窗口
+  'ctrl-k ctrl-k':'pane:split-up'         #分割窗口
+  'ctrl-l ctrl-l':'pane:split-right'     #分割窗口
+  'alt-h alt-h':'window:focus-pane-on-left'      #移动左窗口
+  'alt-j alt-j':'window:focus-pane-below'      #移动下窗口
+  'alt-k alt-k':'window:focus-pane-above'         #移动上窗口
+  'alt-l alt-l':'window:focus-pane-on-right'     #移动右窗口
+'.platform-win32 atom-text-editor, .platform-linux atom-text-editor':
+  'ctrl-;': 'unset!'
+  # 'F5': 'project-switcher:toggle'
 'atom-workspace':
-	'ctrl-alt-o' : 'unset!'
-	'F8': 'symbols-tree-view:toggle'
+  'ctrl-alt-o': 'unset!'
+  # 'F4': 'tree-view-finder:toggle'
+  'F8': 'symbols-tree-view:toggle'
+  'F6': 'git-control:toggle'
+
+# '.platform-linux':
+  # 'F6': 'project-manager:save-project'

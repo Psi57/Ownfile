@@ -1,7 +1,11 @@
+/home/wuxiangdong/.atom/packages (20)
+├── atom-terminal@0.8.0
 ├── autocomplete-clang@0.8.7
 ├── ex-mode@0.7.0
 ├── file-icons@1.6.10
+├── git-control@0.4.0
 ├── git-plus@5.4.7
+├── gruvbox@1.0.5
 ├── highlight-column@0.5.0
 ├── language-lua@0.9.4
 ├── language-viml@0.2.0
@@ -9,8 +13,9 @@
 ├── linter-clang@3.2.3
 ├── linter-lua@1.0.0
 ├── minimap@4.13.4
-├── minimap-find-and-replace@4.3.0
+├── minimap-find-and-replace@4.3.1
 ├── minimap-git-diff@4.1.8
+├── project-manager@2.6.4
 ├── symbols-tree-view@0.10.0
-├── term2@0.9.21
+├── tree-view-git-status@0.2.2
 └── vim-mode@0.61.0

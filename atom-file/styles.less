@@ -30,3 +30,40 @@ atom-text-editor {
 atom-text-editor::shadow .cursor {
   // border-color: red;
 }
+/* 等宽字体 */
+@mono-font-family: "Source Code Pro", "Source Han Sans CN", "Source Han Sans TW","Source Han Sans JP","Source Han Sans KR" sans-serif;
+/* 非等宽字体 */
+@font-family: "Source Sans Pro", "Source Han Sans CN", "Source Han Sans TW","Source Han Sans JP","Source Han Sans KR" sans-serif;
+html,
+body,
+ol,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+span,
+pre,
+section,
+input,
+textarea,
+.atom-panel,
+.status-bar,
+.tree-view,
+.title,
+.current-path,
+.tooltip {
+    font-family: @font-family;
+}
+.autocomplete-plus span,
+code,
+.-tree-view-,
+.symbols-view,
+.editor {
+    font-family: @mono-font-family;
+}
