@@ -1,0 +1,109 @@
+% \usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+% 字体
+\usepackage[T1]{fontenc}
+\usepackage[no-math]{fontspec} % process with XeLaTeX or LuaLaTeX
+\usepackage[theoremfont]{newtxtext} % 定理、证明等里面用斜体西文与正体标点括号.
+\usepackage[smallerops,varvw]{newtxmath} % 分别是更小的大运算符和v,w的另一种写法.
+\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{ntheorem}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{bm}
+\theorembodyfont{\slshape} % 定理、证明等里面用斜体西文与正体标点括号.
+\linespread{1.1}
+\geometry{a4paper,left=1cm,right=1cm,top=1.5cm,bottom=1.5cm}
+\setlength{\lineskip}{0em}% 设置行间距
+\setlength{\parskip}{0.3em}% 设置段落间距
+
+
+\setCJKmainfont{FZShuSong-Z01S}
+\setCJKfamilyfont{fzdbs}{FZDaBiaoSong-B06}
+\setCJKfamilyfont{fzxbs}{FZXiaoBiaoSong-B05}
+\setCJKfamilyfont{fzht}{FZHei-B01S}
+\setCJKfamilyfont{fzkt}{FZKai-Z03S}
+\setCJKfamilyfont{fzss}{FZShuSong-Z01S}
+\setCJKfamilyfont{fzfs}{FZFangSong-Z02S}
+\setCJKfamilyfont{hysse}{HYShuSongErS}
+\setCJKfamilyfont{hyssyj}{HYShuSongYiJ}
+\setCJKfamilyfont{hyssyf}{HYShuSongYiF}
+\setCJKfamilyfont{hydsj}{HYDaSongJ}
+\setCJKfamilyfont{hyxk}{HYXiXingKaiW}
+\setCJKfamilyfont{syht}{Source Han Sans SC}
+\setCJKfamilyfont{syst}{Source Han Serif SC}
+\newcommand{\fzdbs}{\CJKfamily{fzdbs}}
+\newcommand{\fzxbs}{\CJKfamily{fzxbs}}
+\newcommand{\fzht}{\CJKfamily{fzht}}
+\newcommand{\fzkt}{\CJKfamily{fzkt}}
+\newcommand{\fzss}{\CJKfamily{fzss}}
+\newcommand{\fzfs}{\CJKfamily{fzfs}}
+\newcommand{\hysse}{\CJKfamily{hysse}}
+\newcommand{\hyssyj}{\CJKfamily{hyssyj}}
+\newcommand{\hyssyf}{\CJKfamily{hyssyf}}
+\newcommand{\hydsj}{\CJKfamily{hydsj}}
+\newcommand{\hyxk}{\CJKfamily{hyxk}}
+\newcommand{\zhdbs}{\CJKfamily{fzdbs}}
+\newcommand{\zhxbs}{\CJKfamily{fzxbs}}
+\newcommand{\zhht}{\CJKfamily{fzht}}
+\newcommand{\zhkt}{\CJKfamily{fzkt}}
+\newcommand{\zhss}{\CJKfamily{fzss}}
+\newcommand{\zhfs}{\CJKfamily{fzfs}}
+\newfontfamily\DejaVuMono{DejaVu Sans Mono}
+\xeCJKsetup{PunctFamily = fzss}
+
+\newtheorem{DY}{\zhht{\indent 定义}}
+\newtheorem{MT}{\zhht{\indent 命题}}
+\newtheorem{TL}{\zhht{\indent 推论}}
+\newtheorem{XZ}{\zhht{\indent 性质}}
+\newtheorem{YL}{\zhht{\indent 引理}}
+\newtheorem*{DL}{\zhht{\indent 定理}}
+% \newtheorem*{ZM}{\zhht{\indent 证明}}
+\newenvironment{ZM}{\par{\indent\zhht 证明}\hspace{1pt}}{\par}
+% \renewcommand{\proofname}{{\zhht 证明}}
+\newtheorem*{LT}{\zhht{\indent 例}}
+\newtheorem*{JT}{\zhht{\indent 解}}
+\setlength{\theorempreskipamount}{0em}%调整定理环境与上文的距离
+\setlength{\theorempostskipamount}{0em}%调整定理环境与下文的距离
+
+
+\newcommand{\degree}{^\circ}
+\newcommand{\lle}{\leqslant}
+\newcommand{\gge}{\geqslant}
+
+\lstset{
+    numbers=left,
+    numberstyle= \tiny\DejaVuMono,
+    basicstyle=\small\DejaVuMono,
+    keywordstyle= \color{ red!0!green!0!blue!0},
+    commentstyle= \color{ red!0!green!0!blue!0},
+    % frame=shadowbox, % 阴影效果
+    % rulesepcolor= \color{ red!0!green!0!blue!0},
+    escapeinside=``, % 英文分号中可写入中文
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
+    framexleftmargin=2em
+}
+% \renewcommand\title[1]{\def\IHEP@value@title{#1}}
+% \renewcommand\date[1]{\def\IHEP@value@date{#1}}
+% \renewcommand\maketitle{%
+      % \clearpage
+      % \thispagestyle{empty}
+      % \vspace*{50pt}   
+      % \begin{center}
+      % \bf\fzdbs\zihao{3} \underline{~\IHEP@value@title~}
+      % \vskip 20pt
+      % \bf\kaishu\zihao{4} \underline{~\IHEP@value@date~}
+      % \end{center}
+% }
+
+\newcommand{\titleWithDate}[1]{
+    \clearpage
+    \thispagestyle{empty}
+    \begin{center}
+        \fzdbs\zihao{3}{#1} \fzfs\zihao{5}{(\today)} \\
+        \vskip 9pt
+        \rule{\textwidth}{0.8pt}
+    \end{center}
+}

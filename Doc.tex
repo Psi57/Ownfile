@@ -1,0 +1,40 @@
+\documentclass[11pt]{article}
+\usepackage{setting}
+\usepackage{titlesec}   %设置页眉页脚的宏包
+% \usepackage{showkeys}
+\usepackage{CJKpunct}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{subeqnarray}
+\usepackage{cases}
+\usepackage{mathrsfs}
+\usepackage{verbatim}
+\usepackage{ulem}
+\usepackage{bm} % 粗且斜
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}  %自定义，实心
+\newcommand*{\QEDB}{\hfill\ensuremath{\square}}  %自定义，空心
+\newcommand*{\QEDH}{\hfill{\footnotesize\fzfs 证讫}}  %自定义
+\newcommand*{\D}{\text{，}}
+\titleformat{\section}{}{{\large\zhxbs 第}\,\large\bf\thesection\,{\large\zhxbs 节}}{10pt}{\large\zhxbs}
+\titleformat{\subsection}{}{}{10pt}{\zhht}
+\newcommand*{\SL}{\sum\limits}
+\newcommand*{\rC}{{\rm C}}
+\newcommand*{\bN}{{\bf N}}
+\newcommand*{\bZ}{{\bf Z}}
+\numberwithin{equation}{section}
+\begin{document}
+\newpagestyle{main}{
+    % \sethead{\tiny 算子}{}{\tiny \thepage}     %设置页眉
+    % \headrule                                      % 添加页眉的下划线
+    \footrule                                       %添加页脚的下划线
+}
+\pagestyle{main}    %使用该style
+\thispagestyle{empty}
+\punctstyle{kaiming}
+或许是升幂定理的一个思路：\\
+\indent 1. 已知$k \gge 1$，证明$a \equiv b \pmod{p^k} \Rightarrow a^p \equiv b^p \pmod{p^{k+1}}$
+\begin{ZM}
+    考虑因式分解$a^p-b^p = (a-b)(a^{p-1}+a^{p-2}b + \cdots + b^{p-1})$，欲证明$p^{k+1} \mid a^p-b^p$，只需证$p \mid (a^{p-1}+a^{p-2}b + \cdots + b^{p-1})$，注意到$a \equiv b \pmod{p^k}$，因此$(a^{p-1}+a^{p-2}b + \cdots + b^{p-1}) \equiv pa^{p-1} \pmod{p^k}$，这给出$(a^{p-1}+a^{p-2}b + \cdots + b^{p-1}) \equiv 0 \pmod{p}$，从而证明了结论. \QEDB
+\end{ZM}
+注意到上面的结论可以加强：按照$k$是最大满足，证明$k+1$是最大满足$\cdots$.然后考察$p$的指数$\cdots$.
+\end{document}
