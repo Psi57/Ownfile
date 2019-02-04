@@ -1,0 +1,486 @@
+\documentclass[10pt]{article}
+\usepackage{setting}
+\usepackage{titlesec}   %设置页眉页脚的宏包
+% \usepackage{showkeys}
+\usepackage{CJKpunct}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{subeqnarray}
+\usepackage{cases}
+\usepackage{mathrsfs}
+\usepackage{verbatim}
+\usepackage{ulem}
+\usepackage{bm} % 粗且斜
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}  %自定义，实心
+\newcommand*{\QEDB}{\hfill\ensuremath{\square}}  %自定义，空心
+\newcommand*{\QEDH}{\hfill{\footnotesize\fzfs 证讫}}  %自定义
+\newcommand*{\D}{\text{，}}
+\titleformat{\section}{}{{\large\zhxbs 第}\,\large\bf\thesection\,{\large\zhxbs 节}}{10pt}{\large\zhxbs}
+\titleformat{\subsection}{}{}{10pt}{\zhht}
+\newcommand*{\SL}{\sum\limits}
+\newcommand*{\rC}{{\rm C}}
+\newcommand*{\bN}{{\bf N}}
+\newcommand*{\bZ}{{\bf Z}}
+\newcommand*{\que}[1]{\{#1_n\}}
+\numberwithin{equation}{section}
+\begin{document}
+\titleWithDate{函数算子-线性(暂定\&未完成)}
+\newpagestyle{main}{
+    \sethead{\tiny 算子}{}{\tiny \thepage}     %设置页眉
+    \headrule                                      % 添加页眉的下划线
+    % \footrule                                       %添加页脚的下划线
+}
+\pagestyle{main}    %使用该style
+\thispagestyle{empty}
+\punctstyle{kaiming}
+
+
+\par 大约在年初，我从一本书上了解了关于差分算子的概念和应用.如今几个月过去，在阅读了一些资料，博客，教材后，我对算子的了解有所加深.因此，现将算子的概念和它的一些应用整理起来，写在本文.
+\par 本文主要利用算子对数列、组合恒等式问题进行一些探讨，也是我的一些小心得.
+
+\section{一些概念的引入}
+\par 研究数列，首先需要对数列有个良好的定义.在通常情况下，数列被定义为一列数，而数列的下标规定只能是正整数.可是，某些有通项的数列({\zhfs 本文也主要研究数列的通项})可以被自然地延拓为函数，从而下标也可取为$0$甚至是负整数.为了研究的方便，定义数列是由整数映射到一个数域的函数.如此，研究数列的下标变换就更为方便.有时，数列用函数$f(x)$的形式表示.
+\par 对于数域$F$，定义$F_{ZF} = \{f \mid f:\bZ \rightarrow F\}$是定义在$\bZ$的函数.，易验证得$F_{ZF}$构成$F$上的线性空间.而本文的“{\zhht 算子}”指的是$F_{ZF}$上的线性变换.本文主要利用一些特别的算子对数列、组合恒等式等进行研究.
+\par 就像对线性变换一样，对于算子$A\D B$与$\lambda \in F$，定义
+\[
+\begin{split}
+A+B: f(x) &\mapsto Af(x)+Bf(x) \\
+AB: f(x) &\mapsto A(B(f(x)) \\
+\lambda A: f(x) &\mapsto \lambda A(f(x)) \\
+\end{split}
+\]
+标量数乘所定义的算子$\lambda I$可省略$I$，直接记为$\lambda$.
+\par 现在，给出本文研究的主要算子
+\begin{DY}
+    \[\begin{split}
+            E: f(x) \mapsto f(x+1)\\
+            I: f(x) \mapsto f(x) \\
+    \end{split}\]
+    \indent 同时，定义$\Delta = E - I$，称为{\zhht 差分算子}，$E^{k}: f(x) \mapsto f(x+k)$ ，易知它们都是线性变换. \QEDB
+\end{DY}
+% \par 在本文，数列被看成是由自然数映射到一数域的函数，为了方便，通常约定这个数域为复数域.同时，定义
+\begin{DY}
+    对算子$A$，集合$S\subseteq F_{ZF}$定义
+    \[\begin{split}
+        AS = \{As \mid s \in S\}\D SA = \{sA \mid s \in S\}
+    \end{split}\]
+\end{DY}
+\begin{MT}
+    $(\text{{\zhht 消去律}})$ 若算子$A$满足$AF_{NF} = F_{NF}$，则对于算子$B\D C$，有 $BA = CA \Leftrightarrow B = C$
+\end{MT}
+\begin{ZM}
+    $B = C \Rightarrow BA = CA$. \\
+    \indent $BA = CA \Rightarrow \forall f \in F_{NF}\D BAf = CAf \Rightarrow \forall f \in AF_{NF} = F_{NF}\D B=C \Rightarrow B=C$. \QEDB
+\end{ZM}
+\begin{MT}\label{exists}
+    对于$E$的非零多项式$f(E)$，有$f(E)F_{NF}=F_{NF}$，这等价于所有递推数列$b_ka_{n+k} + \cdots + b_0a_n = g(n)$有解.
+\end{MT}
+\begin{ZM}
+    只需确定$\{a_n\}$的第$1\D2\D\cdots\D k$项，后面的所有项都可以确定.而非正整数项也可以确定.\QEDB
+\end{ZM}
+\par 在本文，把$\rC_{n}^{k}\, (n \gge 0)$定义为
+\begin{DY}
+    \[
+        \rC_{n}^{k}=\left\{
+        \begin{array}{rcl}
+            &\cfrac{n!}{k!(n-k)!}  & {0 \lle k \lle n}\\
+            &0  & {k > n \text{或} k < 0}\\
+        \end{array} \right.
+    \]
+\end{DY}
+这不是我们平常称的组合数，但是组合数的许多性质被继承了下来，如$\rC_{n}^{k} + \rC_{n}^{k+1} = \rC_{n+1}^{k+1}$，二项展开等，以及$\forall k\D n \gge 0$，$\rC_{n}^{k} = \frac{n(n-1)\cdots (n-k+1)}{k!}$，它可以被看成是$n$的$k$次多项式.
+\par 将数列的定义扩大，造成的一个结果是数列的前$n$项和的定义改变.将数列下标的取值扩大到$\bZ$后，数列$\{a_n\}$的前$n$项和$\que{S}$作为数列也应该在非正整数上有取值.现在改变$\que{S}$的定义使其满足这点.一个例子是$a_n = n$，则通常意义下$\que{a}$的前$n$项和为$S_{n} = (n)(n+1)/2$，可以看到，无论$n$的取值是正还是负，$S_n - S_{n-1} = a_n$恒成立.仿此，定义
+\begin{DY}
+    对一个确定数列$\que{a}$，和数列$\que{S}$是指满足$S_n - S_{n-1} = a_n$且$S_0 = a_0$的数列.
+\end{DY}
+\begin{MT}
+    一个确定数列$\que{a}$的和数列唯一存在.
+\end{MT}
+\begin{ZM}
+    先确定$S_0 = a_0$，然后，对于$n > 0$，使用$S_{n} = a_n + S_{n-1}$来唯一确定$S_{n}$，用数学归纳法可以证明，$S_{n}$唯一确定.对于$n \lle 0$，使用$S_{n-1} = S_n - a_n$来唯一确定$S_{n-1}$，用数学归纳法可以证明，$S_{n-1}$唯一确定.从而$\que{S}$唯一存在.\QEDB
+\end{ZM}
+可以知道，当$n \gge 0$时，$S_n = a_0 + a_1 + \cdots + a_n$即是平常所称的前$n$项和.
+\section{多项式与指数的乘积}
+\par 对于数域$F$，定义$F[x]$是$F$上可用多项式表示的数列集合(注意：这和普通的多项式环不同！这里的定义更类似函数)，定义：$F[x]_{n}$是$F[x]$中次数不超过$n$的多项式的集合，$F[x]_n$是$n$维线性空间.对于$a \in F$，定义：$a^xF[x]_n = \{g(x) = a^xf(x) \mid f(x) \in F[x]_n\}$，即$a^xF[x]_n$的元素都形如$f(x) = a^x(b_Kx^k + b_{k-1}x^{k-1} + \cdots + b_0)$，其中$k \lle n\D b_0 \cdots b_{k} \in F$.它也是$F$-线性空间.\\
+\indent 对于$g(x) \in a^xF[x]$，$g(x)$可以被表示为$a^xf(x)$，$f(x) \in F[x]$.由$f(x) = g(x)/a^x$，用多项式恒等定理可知$f(x)$唯一.在本节，对于$g(x) = a^{x}f(x)\D f(x)\in F[x]$，定义$\deg g = \deg f$.
+\begin{MT}
+    对于$g(x) = a^{x}F[x]\D \deg g = n\ne 0$，有$\deg (E-a)g(x) = n-1$与$\deg (E-b)g(x) = n \D\forall b \ne a$.
+\end{MT}
+\begin{ZM}
+    显然，$E$在线性空间$a^nF[x]$上的限制也是线性变换({\zhfs\footnotesize 因为$a^{x+1}f(x+1) = a^x(af(x+1))$}).只需对$g(x) = a^{x}x^n$证明此点({\zhfs\footnotesize 因为$a^xF[x]$是线性空间})，$(E-b)g(x) = a^{x}(a(x+1)^n - bx^n)$，当$b \ne a$时，$a(x+1)^n - bx^n$的$x^n$项系数为$a-b\ne 0$.于是$\deg g= n$，当$b= a$时，$x^n$项系数为$0$，$x^{n-1}$项系数为$an$，从而$\deg g = n-1$.\\
+    \indent 于是，对于任意$g(x)$，$\deg (E-b)g(x) = n \D \forall b \ne a$是显然的.对于$(E-a)g(x)$，记$g(x) = a^{x}(bx^{n}) + g_0(x)$，$g_0(x) \in a^xF[x]$，$\deg g_0(x) < n$({\zhfs\footnotesize 用多项式的带余除法})，有$(E-a)g(x) = (E-a)a^x(bx^{n}) + (E-a)g_0(x)$，其中$\deg (E-a)g_0(x) < n-1$，$\deg (E-a)(a^x(bx^n)) = n-1$从而$\deg(E-a)g = n-1$.\QEDB
+\end{ZM}
+\begin{MT}
+    对$n > 0$，$(E-a) a^xF[x]_n = a^xF[x]_{n-1}$，$(E-b)a^xF[x]_n = a^xF[x]_n$，$\forall b \ne a$.
+\end{MT}
+\begin{ZM}
+    对于$a^xF[x]_n$的一组基$M = \{a^xx^n\D \cdots \D a^xx\D 1\}$，$(E-a)$作用于$M$后它们分别变为$n-1$阶，$n-2$阶，$\cdots$，$1$阶与$0$.可知$(E-a)M$是$a^xF[x]_{n-1}$的一组基.从而$(E-a)a^xF[x]_n = a^xF[x]_{n-1}$.对于$b \ne a$，$(E-b)M$依然是$a^xF[x]_n$的一组基，从而$(E-b)a^xF[x]_n = a^xF[x]_n$.\QEDB
+\end{ZM}
+未完待续.\\
+所需要完成的：\\
+1. $\ker f(E)$的维度.(用同构).\\
+2. 证明第5节所需的命题.
+\section{算子在组合恒等式中的应用} \label{s:1}
+首先，关于$k$的函数$\rC_k^m$，有$\Delta^n \rC_k^m = \rC_k^{m-n}$.于是，在含有$\rC_k^m$项的组合式里，将求和等运算用关于$\Delta$的多项式表示出，有时可以化简出答案.
+\par 例如，定义算子$S_n = I + E + \cdots + E^n$，有$(S_nf)(x) = \SL_{k=0}^{n}f(x+k)$，现在，我们尝试把$S_n$化为关于$\Delta$的多项式.就像对等比数列一样，有$(E-I)S_n = E^{n+1}-I = (\Delta + I)^{n+1} - I$，得到
+\[
+    \Delta S_n = \sum_{k=0}^{n+1}{\rC_{n+1}^k \Delta^k}-I = \Delta\sum_{k=0}^{n}{\rC_{n+1}^{k+1}\Delta^{k}}
+\]
+这里$\Delta$和后面的项可交换，因此$S_n\Delta = \left(\SL_{k=0}^{n}{\rC_{n+1}^{k+1}}\Delta^k\right)\Delta$，有$S_n = \SL_{k=0}^{n}{\rC_{n+1}^{k+1}}\Delta^k$
+\par 例如，令$f(k) = \rC_{k}^{m}$，则$(S_nf)(0) = \SL_{k=0}^{n}{\rC_{k}^{m}} = \SL_{k=0}^{n}{\rC_{n+1}^{k+1}\rC_{0}^{m-k}}$，$\rC_{0}^{m-k}$只在$m = k$时取$1$，其他时候取$0$，从而
+$$
+\rC_{0}^{m} + \rC_{1}^{m} + \cdots + \rC_{n}^{m} = \rC_{n+1}^{m+1}
+$$
+由引入的“组合数”的性质，我们有$\rC_{m}^{m} + \rC_{m+1}^{m} + \cdots + \rC_{n}^{m} = \rC_{n+1}^{m+1}$，这个式子被称为{\zhht 朱世杰恒等式}.
+\par 现在来看另一个例子：
+\begin{LT}
+    对于$n \gge m$，证明：$\SL_{k=0}^{m}{\rC_{m}^{k}\rC_{n+k}^m} = \SL_{k=0}^{m}{\rC_{m}^k \rC_n^k2^k}$.
+\end{LT}
+\begin{ZM}
+令数列$a_k = \rC_{n+k}^m$，则 $\SL_{k=0}^{m}{\rC_{m}^{k}\rC_{n+k}^m} = \left(\SL_{k=0}^{m}{\rC_{m}^{k}E^k}\right)a_0 = (E+I)^ma_0 = (\Delta+2)^ma_0 = \SL_{k=0}^{m}{\rC_{m}^{k}2^{m-k}\Delta^k}a_0$.由归纳法可得$\Delta^ka_j = \rC_{n+j}^{m-k}$，于是原式等于$\SL_{k=0}^{m}{\rC_{m}^k\rC_{n}^{m-k}2^{m-k}}$，作指标代换$k = m-k$可得原式等于$\SL_{k=0}^{m}\rC_{m}^{k}\rC_{n}^{k}2^k$.\QEDB
+\end{ZM}
+\begin{LT}
+    证明恒等式：$\SL_{k=0}^{n}{(\rC_n^k)^2\rC_{3n+k}^{2n}} = (\rC_{3n}^n)^2$.
+\end{LT}
+\begin{ZM}
+    我们看到，$\rC_{n}^{x} = (E^{-1}+I)\rC_{n-1}^{x}$$($以$x$为自变量$)$，于是有$\rC_{3n+k}^{2n} = (E^{-1}+I)^{k}\rC_{3n}^{2n} = \SL_{j=0}^{k}{\rC_{k}^j\rC_{3n}^{2n-j}}$，代入原式左边得到：
+    \[
+        \sum_{k=0}^{n}{(\rC_n^k)^2\rC_{3n+k}^{2n}} = \sum_{k=0}^{n}\sum_{j=0}^{k}{\rC_n^k\rC_{n}^k\rC_{k}^{j}\rC_{3n}^{2n-j}} = \sum_{j=0}^{n}\sum_{k=j}^{n}{\rC_{n}^{k}\rC_{n}^{j}\rC_{n-j}^{n-k}\rC_{3n}^{2n-j}} = \sum_{j=0}^{n}{\rC_{n}^{j}\rC_{3n}^{2n-j}\rC_{2n-j}^{n}} = \sum_{j=0}^{n}{\rC_{n}^j\rC_{3n}^{n}\rC_{2n}^{n-j}} = (\rC_{3n}^n)^2
+    \]
+    \QEDB
+\end{ZM}
+\section{算子与高阶等差数列}\label{gjdc}
+\subsection{高阶等差数列}
+对于给定的数列$\{a_n\}$，差分算子$\Delta$对其作用为$\Delta a_n = a_{n+1}-a_{n}$，称$\{\Delta a_n\}$为$\{a_n\}$的一阶差分数列.一般地，定义$\{\Delta^k a_n\}$为数列$\{a_n\}$的$k$阶差分数列.
+\par 对于给定数列$\{a_n\}$，若$\{a_n\}$的$p$阶等差数列不是零数列，而其$p+1$阶等差数列为零数列，则称$\{a_n\}$为$p$阶等差数列.
+\par 可以知道，$\Delta^p n^p = p!$，而$\Delta^{p+1} n^p = 0$，所以$\{n^p\}$是$p$阶等差数列，由$\Delta$的线性性，知道若$Q(x)$是$p$次多项式，则数列$\{Q(n)\}$是$p$阶等差数列.而下面这一推论告诉我们，任一$p$阶等差数列，都可以用一$p$次多项式表示.
+\begin{TL} \label{tl1:1}
+    任一$p$阶等差数列都可以用一$p$次多项式表示.
+\end{TL}
+\begin{ZM}
+    设$\{a_n\}$是一$p$阶等差数列，则$\{\Delta a_n\}$是$p-1$阶等差数列且$a_n = a_0 + \SL_{k=0}^{n-1}{(\Delta a)_k} = a_0 + (S_{n-1}\Delta a)_0$，其中算子$S_n$的定义见第$\ref{s:1}$节.展开得$a_n = a_0 + \SL_{k=0}^{n-1}{\rC_{n}^{k+1}\Delta^{k+1}a_0}$，由于$\{a_n\}$是$p$阶等差数列，结合本文引入的“组合数”的性质，我们有
+    $$a_n = a_0 + \sum_{k=0}^{\min(p-1,n-1)}{\frac{n(n-1)\cdots (n-k)}{k!}\Delta^{k+1}a_0} =  a_0 + \sum_{k=0}^{p-1}{\frac{n(n-1)\cdots (n-k)}{k!}\Delta^{k+1}a_0}$$
+    由于$\{\Delta^{p+1}a_n\}$是零数列，且$\{\Delta^{p}a_n\}$不是零数列，知道$\{\Delta^{p}a_n\}$应该是不为零的常数数列，则$\Delta^{p}a_0 \ne 0$，说明$a_n =a_0 + \SL_{k=0}^{p-1}{\frac{n(n-1)\cdots (n-k)}{k!}\Delta^{k+1}a_0}$是关于$n$的$p$次多项式.\QEDB
+\end{ZM}
+\begin{TL}
+    $p$次多项式$Q(n)$的前$n$项和$\SL_{k=0}^{n}{Q(k)}$可用$n$的$p+1$次多项式表示.
+\end{TL}
+\begin{ZM}
+    记$a_n = \SL_{k=0}^{n}{Q(k)}$，则$\Delta a_n = Q(n+1)$，由于$Q(n)$是$p$次多项式，说明$\{\Delta a_n\}$是$p$阶等差数列，从而$\{a_n\}$是$p+1$阶等差数列，因此$a_n$可用关于$n$的$p+1$次多项式表示.\QEDB
+\end{ZM}
+% $(${\zhht 注：}任意$p$阶等差数列都可以用$p$次多项式表示这一结论也可用数学归纳法证明，此处略.$)$
+% ------------------------- 以前的内容
+\begin{comment}
+\par 可以知道，$\Delta^p n^p = p!$，而$\Delta^{p+1} n^p = 0$，所以$\{n^p\}$是$p$阶等差数列，由$\Delta$的线性性，知道若$Q(x)$是$p$次多项式，则数列$\{Q(n)\}$是$p$阶等差数列.而我们会在第 \ref{dt} 节看到，$\ker \Delta^{p+1}$的一组基是$\{1\D n \D \cdots \D n^{p}\}$，说明任一$p$阶等差数列都可以用一$p$次多项式表示.
+ \par 若$\{a_n\}$是一$p$阶等差数列，则其前$n$项和$\{S_n\}$满足$\Delta S_n = a_{n+1}$，从而$\Delta^{p+1} S_n = \Delta^{p} a_{n+1}$不是零数列而$\Delta^{p+2} S_n = \Delta^{p+1} a_{n+1}$是零数列，说明$\{S_n\}$是$p+1$阶等差数列.这可以直接推出：
+\begin{TL} \label{tl1:1}
+    $p$次多项式$Q(n)$的前$n$项和$\SL_{k=0}^{n}{Q(k)}$可用$n$的$p+1$次多项式表示.
+\end{TL}
+然而，可以发现，在第 \ref{dt} 节证明相关定理时用到了推论\ref{tl1:1}.可以发现要防止循环论证，我们只需用另一种方法证明推论\ref{tl1:1}.
+\begin{ZM}
+    在第 {\rm \ref{s:1}} 节中有$S_n = I + E + \cdots + E^{n} = \SL_{k=0}^{n}{\rC_{n+1}^{k+1}\Delta^k}$，于是$\SL_{k=0}^{n}{Q(k)} = (S_nQ)(0) = \SL_{k=0}^{n}{\rC_{n+1}^{k+1}}\Delta^{k}Q(0)$.
+    由于$Q(n)$是$p$次多项式，因此$\forall k \gge p+1\D \Delta^{k}Q(0) = 0$，从而$S_nQ(0) = \SL_{k=0}^{\min(n,p)}{\rC_{n+1}^{k+1}\Delta^{k}Q(0)}$，根据本文引入的“组合数”的性质，它应该等于$\SL_{k=0}^{p}{\frac{(n+1)n\cdots (n-k+1)}{(k+1)!}\Delta^{k}Q(0)}$，可以被看成是关于$n$的$p+1$次多项式.\QEDB
+\end{ZM}
+$(${\zhht 注：}任意$p$阶等差数列都可以用$p$次多项式表示这一结论也可用数学归纳法证明，此处略.$)$   
+\end{comment}
+% -------------------------- 以前的内容
+\subsection{推广}
+\par 仿造上文，对于$\lambda \ne 0$，定义$\Delta_\lambda = E-\lambda$，现在来求满足$\Delta_\lambda^p a_n = 0$的$a_n$通项具有的形式.
+\par 第一种求法仿造上文.根据数列知识，若$b_n = \Delta_\lambda a_n$，即$b_n = a_{n+1} - \lambda a_{n}$，则$a_{n} = c\lambda^{n} + \lambda^{n-1}\SL_{k=0}^{n-1}{b_{k}\lambda^{-k}}$，其中$c$为常数.若$\Delta_\lambda^p a_n = 0$，仿造上文，有$a_n = c\lambda^n + \lambda^{n-1}\SL_{k=0}^{n-1}{\Delta_\lambda a_{k}a^{-k}}$.
+\par 记算子$S_n^{(\lambda)} = \SL_{k=0}^{n}{E^k\lambda^{-k}}$，则$(E-\lambda)S_n^{(\lambda)} = E^{n+1}\lambda^{-n} - \lambda = (\Delta_\lambda + \lambda)^{n+1}\lambda^{-n} - \lambda = \SL_{k=0}^{n}{\rC_{n+1}^{k+1}\Delta_\lambda^{k+1}\lambda^{-k}}$，说明$S_{n}^{(\lambda)} = \SL_{k=0}^{n}{\rC_{n+1}^{k+1}\Delta_\lambda^{k}\lambda^{-k}}$.代入$a_n$可得
+\[
+    a_n = c\lambda^{n} + \lambda^{n-1}\sum_{k=0}^{n-1}{\rC_{n}^{k+1}\lambda^{-k}\Delta_\lambda^{k+1}a_0} = \lambda^{n}\left(c+\sum_{k=0}^{p-1}{\rC_{n}^{k+1}\lambda^{-k-1}\Delta_\lambda^{k+1}a_0}\right)
+\]
+这说明任意一确定的数列$\{a_n\}$满足$\Delta_\lambda^p a_n = 0$都可以记为$a_n=\lambda^nf(n)$，其中$f(n)$是次数不超过$p$的多项式.
+\par 第二种求法利用了高阶等差数列的已知结论且更简洁.对于$\Delta_\lambda^p a_n = 0$，记$b_n = \lambda^{-n}a_n$，则$a_n = \lambda^nb_n$，有$\Delta_\lambda a_n = \lambda^{n+1}(b_{n+1}-b_n) = \lambda^{n+1}(\Delta b_n)$，利用归纳法可知$\Delta_\lambda^k a_n= \lambda^{n+k}(\Delta^{k}b_n)$，由$\Delta_\lambda^p a_n = 0$，知$\lambda^{n+p}(\Delta^p b_n) = 0$，说明$b_n$是可以由次数不超过$p$的多项式表示，从而知道$a_n = \lambda^{n}f(n)$，$f(n)$是次数不超过$p$的多项式.
+\par 同时，任意一$a_n = \lambda^nf(n)$，都满足$\Delta_\lambda^k a_n = \lambda^{n+k}(\Delta^k f(n))$，说明若$f(n)$是次数不超过$p$的多项式，则$\Delta_\lambda^{p} a_n = 0$.
+\par 这一小节可以直接应用在第 \ref{dt} 节中，而且第 \ref{dt} 节还提供了一种数学归纳法的证明.
+\section{算子与常线性递推数列} \label{dt}
+\par 任一关于数列$\{a_n\}$的递推公式$b_ka_{n+k}+b_{k-1}+a_{n+k-1}+\cdots+b_{0}a_{n}=g(n)$，$($其中$g(n)$是一给定函数，$b_0\D \cdots \D b_k$是常数，$b_k \ne 0$$)$，都可以看成是$\left(b_kE^{k} + \cdots + b_0I\right)a_n = g(n)$.我们先探讨最简单的情况：
+\begin{YL} \label{yl1}
+    满足递推式$a_{n+1}-ba_{n} = g(n)$的通解为$a_n = cb^n+\SL_{k=0}^{n-1}{g(k)b^{n-1-k}}$，其中$c$为常数.
+\end{YL}
+这个结论的证明可以由简单的递推数列的知识得到，证明略.
+\subsection{常线性齐次递推数列}
+\par 首先，我们研究$(E-a)^ka_n = 0$的通解，即求出$\ker (E-a)^k$，其中$a \ne 0$.其实第 \ref{gjdc} 节已经给出了答案，这里再给一个归纳法的证明.第一步，由引理$\ref{yl1}$得
+$$
+(E-a)a_n = 0 \Leftrightarrow a_n = C_1a^n \text{，其中$C_1$为常数.}
+$$
+那么，$(E-a)^2a_{n} = 0$等价于$(E-a)\left((E-a)a_n\right) = 0$，可以推出$(E-a)a_n = C_1a^n$，再次利用引理$\ref{yl1}$得$a_n = C_2a^n+C_1\SL_{k=0}^{n-1}{a^ka^{n-1-k}} = C_2a^n + C_1(n-1)a^{n-1} = (C_2-C_1a^{-1})a^{n} + a^{-1}C_1na^n$，注意到$C_1\D C_2$是常数，调整$C_1\D C_2$可得$a_n = C_2a^{n} + C_1na^{n}$.像这样，反复利用引理$\ref{yl1}$，可以得到
+\begin{TL}
+    $\ker (E-a)^k$的一组基为$\{a^n \D na^n \D \cdots n^{k-1}a^n\}$，其中$a\ne 0$.
+\end{TL}
+\begin{ZM}
+    首先：若$g(n)$是关于$n$的$k$次多项式，则$\SL_{k=0}^{n}{g(k)}$是关于$n$的$k+1$次多项式.\\
+    \indent 利用数学归纳法.当$k=1$时，已验证得命题成立.\\
+    \indent 若$k=m-1$时命题已经成立，则$k=m$时：
+    \[\begin{split}
+            (E-a)^ka_n = 0 &\Leftrightarrow (E-a)a_n = C_0a^n+C_1na^n+\cdots+C_{k-2}a^{k-2}a^n \\
+            &\Leftrightarrow a_n = Ca^n + C_0f_1(n)a^{n-1} + C_1f_2(n)a^{n-1}+ \cdots + C_{k-2}f_{k-1}(n)a^{n-1}
+    \end{split}\]
+    其中$C\D \cdots \D C_{k-2}$是常数，$f_{k}(n) = \SL_{i=0}^{n-1}{i^{k-1}}$是关于$n$的$k$次多项式.\\
+    \indent 可见$\ker (E-a)^{k}$的一组基为$\{a^n \D na^n \D \cdots n^{k-1}a^n\}$.由数学归纳法原理知推论成立.\QEDB
+\end{ZM}
+现在，给出一个引理
+\begin{YL}\label{yl2}
+    若$f_1(x)\D f_2(x)\D \cdots\D f_n(x)$是数域$F$上两两互素的多项式，$\mathscr{A}$是定义在数域$F$上的线性空间$V$的线性变换，则$\ker f_1({\mathscr{A}})f_2({\mathscr{A}})\cdots f_n({\mathscr{A}}) = \ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}}) \oplus \cdots \oplus \ker f_n({\mathscr{A}})$.
+\end{YL}
+\begin{ZM}
+    先证明$n=2$的情况.首先，证明$\ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}})$ 是直和.
+    \par 若${\alpha} \in \ker f_1({\mathscr{A}})\D \beta \in \ker f_2({\mathscr{A}})$有$\alpha + \beta = {\bf{0}}$，则在等式两边用$f_1({\mathscr{A}})$作用得$f_1({\mathscr{A}})(\beta) = \bf{0}$，所以$\beta \in \ker f_1({\mathscr{A}}) \cap \ker f_2({\mathscr{A}})$. \\
+    \indent 由于$f_1\D f_2$互素，存在多项式$v(x)\D u(x)$，使得$v(x)f_1(x)+u(x)f_2(x)=1$，于是$v({\mathscr{A}})f_1({\mathscr{A}})(\beta)+u({\mathscr{A}})f_2({\mathscr{A}})(\beta)=\beta$，从而$\beta = \bf{0}$.同理$\alpha = \bf{0}$，这说明$\ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}})$是直和. \\
+    \indent 再证$\ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}}) = \ker f_1({\mathscr{A}})f_2({\mathscr{A}})$.由于$f_1\D f_2$互素，存在多项式$v(x)\D u(x)$，使得$v(x)f_1(x)+u(x)f_2(x)=1$，于是对于$\alpha \in \ker f_1({\mathscr{A}})f_2({\mathscr{A}})$，$\alpha = v({\mathscr{A}})f_1({\mathscr{A}})(\alpha)+u({\mathscr{A}})f_2({\mathscr{A}})(\alpha)$，其中$v({\mathscr{A}})f_1({\mathscr{A}})(\alpha) \in \ker f_2({\mathscr{A}})\D u({\mathscr{A}})f_2({\mathscr{A}})(\alpha) \in \ker f_1({\mathscr{A}})$，说明$\ker f_1({\mathscr{A}})f_2({\mathscr{A}})$上任意向量都可以表示为$\ker f_1({\mathscr{A}})$，$\ker f_2({\mathscr{A}})$上向量的和.可见$\ker f_1({\mathscr{A}})f_2({\mathscr{A}}) = \ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}})$. \\
+    \indent 于是，由于$f_1(x)\D \cdots f_n(x)$两两互素，所以
+    \[\begin{split}
+        \ker f_1({\mathscr{A}})f_2({\mathscr{A}})\cdots f_n({\mathscr{A}}) &= \ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}})\cdots f_n({\mathscr{A}})\\ 
+        &= \ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}}) \oplus \ker f_3({\mathscr{A}})\cdots f_n({\mathscr{A}}) \\ 
+        &= \cdots\\
+        &= \ker f_1({\mathscr{A}}) \oplus \ker f_2({\mathscr{A}}) \oplus \cdots \oplus \ker f_n({\mathscr{A}})
+    \end{split}\]. \QEDB
+\end{ZM}
+\par 有了这个引理后，对于$t$个互不相同的数$a_1\D \cdots a_t$，我们可以直接推出
+\[
+    \ker(E-a_1)^{k_1}(E-a_2)^{k_2}\cdots (E-a_t)^{k_t} = \ker(E-a_1)^{k_1} \oplus \cdots \oplus \ker(E-a_t)^{k_t}
+\]
+从而有
+\begin{TL}
+    $\ker(E-a_1)^{k_1}\cdots (E-a_t)^{k_t} \text{的一组基为} \{a_1^n\D na_1^n \D \cdots n^{k_1-1}a_1^n \D \cdots \D a_{t}^n \D \cdots \D n^{k_t-1}a_{t}^n\}$，其中$a_1\D \cdots a_t$互不相同.\QEDB
+\end{TL}
+
+下面阐述求常线性齐次递推数列通解的算法：\\
+\indent 对于$b_ka_{n+k}+\cdots+b_0a_n = 0\,(b_k \ne 0)$，解出$b_kx^k+\cdots+b_0 = 0$的所有复根$x_1\D x_2 \D \cdots x_t$，记它们的重数分别为$k_1\D k_2 \D \cdots k_t$，则$\{a_n\}$的通解为$a_n = C_{1,1}x_1^n + C_{1,2}nx_1^n + \cdots + C_{1,k_1}n^{k_1-1}x_1^n + \cdots + C_{t,1}x_t^n + \cdots + C_{t,k_t}n^{k_t-1}x_t^n$，其中$C_{i,j}$皆为常数$(\text{待定系数})$.
+\par 这种方法被称为{\zhht 特征根法}，其中$b_kx^k+\cdots+b_0 = 0$称为递推式$b_ka_{n+k}+\cdots+b_0a_n = 0$的{\zhht 特征方程}.
+\subsection{常线性非齐次递推数列}
+就像解非齐次线性方程组一样，若知道递推$(E-a_1)^{k_1}(E-a_2)^{k_2}\cdots (E-a_t)^{k_t}a_n = g(n)$的一个解$b_n$，我们可以推出所有解都有形式$a_n = b_n + c_n$，其中$c_n$是$(E-a_1)^{k_1}(E-a_2)^{k_2}\cdots (E-a_t)^{k_t}c_n = 0$的任意解.而且只要重复利用引理\ref{yl1}，我们可以求出一个特解.
+\par 但大多时候，求和并不是那么方便.方便的方法之一是待定系数法.若$g(n)$满足$(E-b_1)^{m_1}\cdots (E-b_l)^{m_l}g(n) = 0$，那么在递推式两边用$(E-b_1)^{m_1}\cdots (E-b_l)^{m_l}$作用可以得到$(E-b_1)^{m_1}\cdots (E-b_l)^{m_l}(E-a_1)^{k_1}(E-a_2)^{k_2}\cdots (E-a_t)^{k_t}a_n = 0$，求得$a_n$的通解形式后再用$(E-a_1)^{k_1}(E-a_2)^{k_2}\cdots (E-a_t)^{k_t}$作用于$a_n$使得$a_n$的待定系数满足$(E-a_1)^{k_1}(E-a_2)^{k_2}\cdots (E-a_t)^{k_t}a_n = g(n)$.
+\begin{LT}
+    求$a_n = n^22^n$的前$n$项和$S_n$.
+\end{LT}
+\begin{JT}
+    $S_n$满足$(E-I)S_n = (n+1)^22^{n+1}$，两边用$(E-2)^3$作用得$(E-2)^3(E-1)S_n = 0$，于是$S_n$有形式$C_1+C_22^n+C_3n2^n+C_4n^22^n$，$a_n = S_n - S_{n-1} = C_4n^22^{n-1}+n2^{n-1}(C_3+2C_4)+2^{n-1}(C_2-C_4+C_3)$，和$a_n = n^22^n$比较得
+    \[
+        \left\{
+        \begin{aligned}
+            &C_4 = 2 \\
+            &C_3+2C_4 = 0 \\
+            &C_2-C_4+C_3 =  0
+        \end{aligned}
+        \right.
+    \]
+    解之，得$S_n = C_1+6\times 2^n-4n2^n+2n^22^n$，将$S_1 = a_1$代入得$S_n = -6+6\times 2^n-4n2^n+2n^22^n$.\QEDB
+\end{JT}
+$($闲话：Q：为什么$C_4n^22^{n-1}+n2^{n-1}(C_3+2C_4)+2^{n-1}(C_2-C_4+C_3)$和$n^22^n$相等则系数一定对应相等呢？\\
+A：因为$2^n\D n2^n \D n^22^n${\zhht 线性无关}！$)$
+\par 另一种常见的方法是配凑，即对于$f(E)a_n = g(n)$，求出一个$b_n$使得递推式化为$f(E)(a_n-b_n) = 0$.$b_n$等价于$f(E)a_n = g(n)$的一个解.有时若$g(n)$是多项式函数，我们可能会尝试用多项式数列$b_n$来对原递推式进行配凑，并且有时$b_n$的次数和$g(n)$一样，有时$b_n$的次数却比$g(n)$高.下面的推导来验证多项式配凑的可行性.并且给出$b_n$次数的具体取值.
+\par 在这里，记$F_k[x]$表示数域$F$上以$x$为字母的所有次数不超过$k$的多项式的集合.
+\begin{YL}
+    若$a \ne 1$，则$(E-a)F_k[x] = F_k[x]$，并且$(E-I)F_{k+1}[x] = F_{k}[x]$.
+\end{YL}
+\begin{ZM}
+    若$a \ne 1$，对任意多项式$f(x)$，记其首项系数为$b \ne 0$，则$f(x+1)-af(x)$的首项系数为$b-ab$，由$a \ne 1$知$b-ab \ne 0$，从而$\deg (E-a)f(x) = \deg f(x)$.可见$(E-a)$在线性空间$F_k[x]$上的限制为线性变换.欲证$(E-a)F_k[x] = F_k[x]$，只需证明$\ker (E-a)|_{F_k[x]}$只有零.由上文可得，$f(x) \in F_k[x]$的最小多项式有形式$(\lambda - 1)^m$，而$(\lambda - 1)$与$(\lambda - a)$互素，这说明$\ker (E-a)|_{F_k[x]}$只含零，从而证明了$(E-a)F_k[x] = F_k[x]$.
+    \par 对于$(E-I)$，由第 $\ref{gjdc}$ 节的知识有$\forall f(x) \in F_{k+1}[x]\D (E-I)f(x) \in F_{k}[x]$，说明$(E-I)F_{k+1}[x] \subseteq F_{k}[x]$.另一方面，$\forall f(x) \in F_k[x]$，取$g(x)=\SL_{k=0}^{n-1}{f(k)}$便有$(E-I)g(x) = f(x)$，其中$g(x) \in F_{k+1}[x]$，所以$(E-I)F_{k+1}[x] \supseteq F_{k}[x]$，因此$(E-I)F_{k+1}[x] = F_k[x]$.\QEDB
+\end{ZM}
+\begin{TL}
+    对于$g(x) \in F_m[x]$，存在多项式$f(x) \in F_{m+k}[x]$使得$(E-a_1)^{k_1} \cdots (E-a_t)^{k_t}(E-I)^kf(x) = g(x)$.
+\end{TL}
+\begin{ZM}
+    由$(E-a_1)^{k_1}\cdots (E-a_t)^{k_t}(E-I)^k F_{m+k}[x] =(E-a_1)^{k_1}\cdots (E-a_t)^{k_t}F_m[x] = F_m[x]$知推论成立.\QEDB
+\end{ZM}
+上述推论证明了对于递推式$f(E)a_n = g(n)$，且$g(n)$是关于$n$的多项式，若$f(E)$中含$(E-I)$因子的个数为$k$，$\deg g(n) = m$，则可以用$m+k$次多项式进行配凑.
+\par 当然，配凑还可以为差比形$(a^nf(n))$，它们具体的性质和多项式配凑非常相似，此处略过.
+\section{常线性递推数列组}
+在上一节我们研究了常线性递推数列的解法，在本节，我们研究常线性递推数列组.这里用一个例题作为开头.
+\begin{LT}
+    求满足下列式子的$\{a_n\}$，$\{b_n\}$的通解.
+    \[
+        \left\{
+            \begin{aligned}
+                &a_{n+2} = -3a_{n+1}+4a_n-6b_{n+1}-12b_n \\
+                &b_{n+2} = -b_{n+1}+2b_n+a_{n+1}-a_n
+            \end{aligned}
+        \right.
+    \]
+\end{LT}
+\begin{JT}
+这是$a_n\D b_n$递推式的杂糅交错形成的方程组，稍微移项得
+\[
+        \left\{
+            \begin{aligned}
+                &a_{n+2}+3a_{n+1}-4a_n + 6b_{n+1} + 12b_n = 0\\
+                &b_{n+2} + b_{n+1}-2b_n - a_{n+1} + a_n= 0
+            \end{aligned}
+        \right.
+\]
+或者说
+\[
+        \left\{
+            \begin{aligned}
+                &(E^2+3E-4)a_n + 6(E+2)b_n = 0\\
+                &-(E-1)a_n + (E^2+E-2)b_n = 0
+            \end{aligned}
+        \right.
+\]
+这时，如果我们把它写成矩阵形式：
+\[
+    \begin{pmatrix} (E-1)(E+4) & 6(E+2) \\ -(E-1) & (E-1)(E+2) \end{pmatrix} \begin{pmatrix}
+    a_n \\ b_n\end{pmatrix} = {\bm{O}}
+\]
+将$\lambda$矩阵$\begin{pmatrix} (\lambda-1)(\lambda+4) & 6(\lambda+2) \\ -(\lambda-1) & (\lambda-1)(\lambda+2) \end{pmatrix}$记为$\bm {A}(\lambda)$，对$\bm{A}(\lambda)$进行初等变换使其成为对角方阵：
+\[ \begin{split}
+        & \begin{pmatrix} (\lambda-1)(\lambda+4) & 6(\lambda+2) \\ -(\lambda-1) & (\lambda-1)(\lambda+2) \end{pmatrix} \xrightarrow[]{(1,2)} \begin{pmatrix} -(\lambda-1) & (\lambda-1)(\lambda+2) \\ (\lambda-1)(\lambda+4) & 6(\lambda+2) \end{pmatrix} \\ &\xrightarrow[]{(\lambda+4)(1) + (2)} \begin{pmatrix} -(\lambda-1) & (\lambda-1)(\lambda+2) \\ 0 & (\lambda+1)(\lambda+2)^2 \end{pmatrix} \xrightarrow[(\lambda+2)(1)+(2)]{} \begin{pmatrix} -(\lambda-1) & 0 \\ 0 & (\lambda+1)(\lambda+2)^2 \end{pmatrix}
+\end{split}\]
+记${\bm \Lambda}(\lambda) = \begin{pmatrix} -(\lambda-1) & 0 \\ 0 & (\lambda+1)(\lambda+2)^2 \end{pmatrix}$，${\bm Q}(\lambda)  =  \begin{pmatrix} 1 & \lambda+2 \\ 0 & 1 \end{pmatrix}$与${\bm P}(\lambda)  = \begin{pmatrix} 0 & 1 \\ 1 & \lambda+4\end{pmatrix}$，则上述变换告诉我们$\bm{P}(\lambda) \bm{A}(\lambda) \bm{Q}(\lambda) = \bm{\Lambda}(\lambda) $，因此原方程就是$\bm{P}^{-1}(E) \bm{\Lambda}(E) \bm{Q}^{-1}(E) \bm{X} = \bm{O}$$\Leftrightarrow \bm{\Lambda}(E) \bm{Q}^{-1}(E) \bm{X} = \bm{O}$$\Leftrightarrow \bm{Q}^{-1}(E) \bm{X} = \begin{pmatrix}C_1 \\ C_2(-1)^n + C_3(-2)^n + C_4(-2)^nn\end{pmatrix}$\\$ \Leftrightarrow \bm{X} = \begin{pmatrix}C_1 + C_2(-1)^n + C_4(-2)^{n+1} \\ C_2(-1)^n + C_3(-2)^n + C_4(-2)^nn \end{pmatrix}$
+这说明原递推的通解为
+\[
+        \left\{
+            \begin{aligned}
+                &a_n = C_1 + C_2(-1)^n + C_4(-2)^{n+1} \\
+                &b_n = C_2(-1)^n + C_3(-2)^n + C_4(-2)^nn
+            \end{aligned}
+        \right.
+\]
+\QEDB
+\end{JT}
+一般地，对于常系数线性递推
+\[
+        \left\{
+            \begin{aligned}
+                &a^{(1)}_{n+k} = F_1(a^{(1)}_n\D\cdots a^{(1)}_{n+k-1}\D\cdots\D a^{(m)}_{n+k-1}\D n)\\
+                &a^{(2)}_{n+k} = F_2(a^{(1)}_n\D\cdots a^{(1)}_{n+k-1}\D\cdots\D a^{(m)}_{n+k-1}\D n)\\
+                &\cdots \\
+                &a^{(m)}_{n+k} = F_m(a^{(1)}_n\D\cdots a^{(1)}_{n+k-1}\D\cdots\D a^{(m)}_{n+k-1}\D n)
+            \end{aligned}
+        \right.
+\]
+求$\{a^{(i)}_n\}$通解，我们可以把它写成矩阵形式$\bm{A}(E)\bm{X} = \bm{Y}$，作初等变换使$\bm{A}(\lambda) = \bm{P}^{-1}(\lambda)\bm{\Lambda}(\lambda)\bm{Q}^{-1}(\lambda)$，将$\bm{A}(\lambda)$相抵于对角阵$\bm{\Lambda}{(\lambda)}$，则原递推的通解可以表示为$\bm{X} \in \bm{Q}(E)\bm{\Lambda}^{-1}(E)\bm{P}(E)\bm{Y}$，其中$\bm{\Lambda}^{-1}(E)\bm{S} = \{\bm{K} \mid \bm{\Lambda}(E)\bm{K} = \bm{S}\}$.由于$\bm{\Lambda}(E)$是对角阵，解$\bm{\Lambda}^{-1}(E)\bm{P}(E)\bm{Y}$其实是解$m$个常线性(非)齐次递推数列.注意，若$\bm{Y} \ne \bm{O}$，则原递推式可能无解.
+\par 现在，一个问题是，$\bm{A}(E)\bm{X} = \bm{Y}$的解空间的维数是多少？按照上文，将$\bm{A}(\lambda)$相抵成对角阵$\bm{A}(\lambda) = \bm{P}^{-1}(\lambda)\bm{\Lambda}(\lambda)\bm{Q}^{-1}(\lambda)$，于是原式等价于$\bm{\Lambda}(E)\bm{Q}^{-1}(E)\bm{X} = \bm{P}(E)\bm{Y}$，知\\
+\indent{\zhht 情况一} 若存在正整数$i$使得$\bm{\Lambda}(\lambda)$的第$i$行$i$列元素为$0$但是$\bm{Y}$的第$i$行不为零，则原式无解. \\
+\indent{\zhht 情况二} 若不满足情况一，对$\bm{\Lambda}(\lambda)$每个非零多项式$f_{i}(\lambda)$，记$\deg f_i(\lambda) = m_i$，$f_i(\lambda) = \lambda^{t_i}g_i(\lambda)$并且$\lambda \nmid g_i(\lambda)$，则原式解空间的维度为所有$m_i-t_i$的和.
+\begin{LT}
+    求满足下列式子的通解：
+    \[
+        \left\{
+            \begin{aligned}
+                &a_{n+2} = a_{n+1}+2a_n+b_{n+1}+b_n \\
+                &b_{n+2} = -2b_{n+1}-b_n+a_{n+1}-2a_n
+            \end{aligned}
+        \right.
+    \]
+\end{LT}
+\begin{JT}
+    记$\bm{A}(\lambda) = \begin{pmatrix}(\lambda^2-\lambda-2) & -(\lambda+1) \\-(\lambda -2) & (\lambda+1)^2 \end{pmatrix}$，则原式即求$\bm{A}(E)\bm{X} = \bm{O}$的解.对$\bm{A}(\lambda)$作初等变换得\\$\bm{A}(\lambda) = 
+    \begin{pmatrix}
+        1 & 0 \\
+        \lambda+1 & 1
+    \end{pmatrix}^{-1}
+    \begin{pmatrix}
+        -(\lambda+1) & 0 \\
+        0 & \lambda(\lambda+2)(\lambda-2)
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & \lambda-2
+    \end{pmatrix}^{-1}
+    $
+    ，从而原式的通解为
+    \[
+        \left\{
+            \begin{aligned}
+                &a_{n} = C_2(-2)^n + C_32^n \\
+                &b_{n} = C_1(-1)^n + 2C_2(-2)^{n+1}
+            \end{aligned}
+        \right.
+    \]
+\end{JT}
+\begin{LT}
+    解方程：
+    \[
+        \begin{pmatrix}
+            (E-2)^2 & E^2-1 \\
+            4E-11 & 4E+5
+        \end{pmatrix}\bm{X} = 
+        \begin{pmatrix}
+            n \\ n^2
+        \end{pmatrix}
+    \]
+\end{LT}
+\begin{JT}
+    由于$
+        \begin{pmatrix}
+            (E-2)^2 & E^2-1 \\
+            4E-11 & 4E+5
+        \end{pmatrix}^{-1} = \cfrac{1}{9}
+        \begin{pmatrix}
+            4E+5 & 1-E^2 \\
+            11-4E & (E-2)^2
+        \end{pmatrix}
+    $，在式子两边左乘它可得
+    \[
+        \bm{X} = \cfrac{1}{9}\begin{pmatrix}
+            5n \\ n^2+3n-4
+        \end{pmatrix}
+    \]
+\end{JT}
+\par 在上面的步骤中，矩阵的作用实际上是递推式的下标变换，加减消元(对应左乘)和换元(对应右乘).例如第一题将矩阵的作用翻译过来，则是
+\begin{JT}
+    \begin{subequations}
+       \begin{numcases}{}
+            a_{n+2}+3a_{n+1}-4a_n + 6b_{n+1} + 12b_n = 0 \label{5:1}\\
+            b_{n+2} + b_{n+1}-2b_n - a_{n+1} + a_n= 0 \label{5:2}
+        \end{numcases}
+    \end{subequations}
+    对 \eqref{5:2} 作下标变换$n = n+1$得到
+    \begin{equation}
+        b_{n+3}+b_{n+2}-2b_{n+1}-a_{n+2}+a_{n+1} = 0 \label{5:3}
+    \end{equation}
+计算 $\eqref{5:3} + 4 \eqref{5:2} + \eqref{5:1}$得到
+\begin{equation}
+    b_{n+3}+5b_{n+2}+8b_{n+1}+4b_n = 0 \label{5:4}
+\end{equation}
+将$b_{n+1} + 2b_{n}-a_{n}$看成整体，由\eqref{5:2}有
+\begin{equation}
+    (b_{n+2}+2b_{n+1}-a_{n+1})-(b_{n+1}+2b_{n}-a_{n}) = 0 \label{5:5}
+\end{equation}
+由\eqref{5:4}式知$b_n = C_2(-1)^n + C_3(-2)^n + C_4(-2)^nn$，从而$b_{n+1}+2b_{n} = C_2(-1)^n + C_4(-2)^{n+1}$，\eqref{5:5}告诉我们$b_{n+1}+2b_{n}-a_{n}$是常数数列，于是$a_{n} = C_1 + C_2(-1)^n + C_4(-2)^{n+1}$，验证可得原递推的通解为
+\[
+        \left\{
+            \begin{aligned}
+                &a_n = C_1 + C_2(-1)^n + C_4(-2)^{n+1} \\
+                &b_n = C_2(-1)^n + C_3(-2)^n + C_4(-2)^nn
+            \end{aligned}
+        \right.
+\]
+其中$C_1\D C_2\D C_3\D C_4$为常数.\QEDB
+\end{JT}
+\par 《九章算数》曾说：“方程以御错糅正负”，从这一小节的例子看到，无论是定义在数域上的方程组问题，还是定义在算子多项式上的“递推数列组”，都可以用矩阵解决，这么看来矩阵的方法是解决线性问题的一条康庄大道.
+\section{差分与微分}
+\section{一些变系数线性递推数列}
+\section{更多的例子}
+\subsection{片段和}
+对于一个数列$\{a_n\}$，记其前$n$项和为$\{S_n\}$，则$\{a_n\}$从$n+1$开始长度为$m$的片段和可以表示为$S_{n+m}-S_{n}$，或者说$(E^m-I)S_n$，记为$\{T_n\}$，则$T_n = (E^m-I)S_{n} = \frac{E^m-I}{E-I}a_{n+1}$.若$a_n$关于$E$有最小多项式$d_a(\lambda)$，则$T_n$的最小多项式是$\frac{d_a(\lambda)}{\left(d_a(\lambda),\frac{\lambda^m-1}{\lambda-1}\right)}$，这就可以确定$T_n$的形式.举两个具体的例子：等差数列的片段和依然是等差数列，$a_n = 2^nn$的片段和有形式$2^n(An+B)$.
+\begin{LT}
+    已知数列$($下标从$1$开始$)$$c_n = a_nb_n$，其中$\{a_n\}$是等差数列，$\{b_n\}$是等比数列且公差、公比为实数.记$\{c_n\}$的前$n$项和为$\{S_n\}$，$m$为一正偶数，若$S_m = 11$，$S_{2m} = 7$，$S_{3m} = -201$，求$S_{4m}$.
+\end{LT}
+\begin{JT}
+    不妨记$S_0 = 0$，记$b_n$的公比为$q$.可以看到，$S_{(n+1)m}-S_{nm} = c_{nm+1}+\cdots+c_{(n+1)m}$，是$c_n$以$nm+1$为起点，长度为$m$的片段和.记$c_{n+1} + \cdots + c_{n+m} = T_n$，则$T_n$有零化多项式$(\lambda-q)^2$，$T_n$具有形式$q^n(An+B)$，则$S_{(n+1)m} - S_{nm} = T_{nm} = q^{mn}(Anm+B)$.记$T_{nm} = c'_n\D p = q^m$.则$(E-p)^2c'_n = 0$，即
+    $$c'_{n+2} - 2p c'_{n+1} + p^2c'_n = 0$$
+    将$c'_{0} = 11\D c'_1 = -4\D c'_2 = -208$代入得$11p^2+8p-208 = 0$，解得$p_1 = 4\D p_2 = -\frac{52}{11}$，由于$p = q^m \gge 0$，$p = 4$.因此$c'_3 = 2pc'_2-p^2c'_1 = 8c'_2-16c'_1=-1600$，从而$S_{4m} = -1600+S_{3m} = -1801$. \QEDB
+\end{JT}
+\section{尚未完成，仍需补充的内容}
+\noindent 阿贝尔变换\\
+组合恒等式、高阶等差数列的例子\\
+\sout{常线性非齐次递推数列的多项式配凑的可行性}\\
+\sout{高阶等差数列对于幂函数乘以多项式时的推广，用它来证明特征根法}\\
+幂和问题\\
+变系数线性递推数列中算子的非交换性\\
+未完成的章节\\
+收藏夹$CCC$的内容\\
+\sout{高阶等差数列推论说不定能换个更简单的解法？}可以\\
+\sout{常线性递推数列组中初等变换的直观意义}\\
+\sout{简单数列的片段和}\\
+简单函数递推\\
+更合理的写作顺序：从定义出发，证明性质与给出应用.\\
+组合式的最后一个例题，写好一点.\\
+这里提一下：写作主题和顺序.这里，第2、3、4节在各自主题外都在为第5节做相同的铺垫.整理一下.\\
+\today\LaTeX
+\end{document}
